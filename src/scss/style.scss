@@ -1,0 +1,946 @@
+// Миксин отзывчивый адаптив
+@import "adaptiv-value";
+
+//Пермеменные ========================================================
+$ff-m: "Montserrat", sans-serif;
+$ff-y: "Yeseva One", cursive;
+$white: #fff;
+$green: #c8e982;
+$text: #151719;
+$red: #fef5f2;
+// ===================================================================
+
+//==Обнуление ========================================================
+@import "nullstyle";
+//==//Обнуление ======================================================
+
+//==layout============================================================
+body {
+  color: $text;
+  font-size: 14px;
+  font-family: $ff-m;
+}
+body.lock {
+  overflow: hidden;
+}
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1 1 auto;
+}
+.content {
+  margin-top: 50px;
+  padding-top: 50px;
+
+  @include adaptiv-value("margin-top", 50, 20, 1);
+  @include adaptiv-value("padding-top", 50, 20, 1);
+}
+.container {
+  max-width: 1220px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+//==//==layout========================================================
+
+//==blocks============================================================
+.btn {
+  display: inline-flex;
+  height: 50px;
+  width: 270px;
+  justify-content: center;
+  align-items: center;
+  color: $text;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: $green;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1.4;
+  @include adaptiv-value("height", 50, 35, 1);
+  @include adaptiv-value("width", 270, 180, 1);
+  @include adaptiv-value("font-size", 16, 12, 1);
+  transition: all 0.8s ease 0s;
+}
+.btn:hover {
+  background-color: darken($green, $amount: 10%);
+  box-shadow: 0px 0px 5px 5px rgba($green, 0.9);
+  transition: all 0.3s ease 0s;
+}
+
+.blok-red {
+  background-color: $red;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  padding: 10px;
+  line-height: 1.4;
+}
+.blok-red::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 3px;
+  background-color: $green;
+  position: absolute;
+  left: 0px;
+  top: 0;
+}
+
+.title {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  line-height: 1.4;
+  @include adaptiv-value("margin-bottom", 35, 20, 1);
+  @include adaptiv-value("font-size", 22, 20, 1);
+}
+//==//=blocks=======================================================
+
+@import "header";
+
+//main-scrin========================================================
+
+.main-scrin {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/main/main-top.jpg") center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    max-width: 600px;
+    padding: 15px;
+  }
+
+  &__title {
+    color: $white;
+    font-size: 72px;
+    width: 600px;
+    text-align-last: left;
+    line-height: 1.1;
+    margin-bottom: 35px;
+    font-family: $ff-y;
+    @include adaptiv-value("width", 600, 300, 1);
+    @include adaptiv-value("font-size", 72, 32, 1);
+
+    transform: translate(0px, 120%);
+    opacity: 0;
+    transition: all 0.8s ease 0s;
+  }
+
+  &__title.active-scroll {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+
+  &__btn {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include adaptiv-value("width", 450, 280, 1);
+
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.8s ease 0.4s;
+  }
+
+  &__btn.active-scroll {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  &__mode {
+    height: 110px;
+    width: 110px;
+    background: url("../img/icons/mode-m.svg") 0 0 / cover no-repeat;
+    transition: all 0.8s ease 0s;
+
+    @include adaptiv-value("height", 110, 77, 1);
+    @include adaptiv-value("width", 110, 77, 1);
+
+    animation-name: rotation;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__mode:hover {
+    @media (min-width: 767px) {
+      opacity: 0.8;
+    }
+  }
+}
+
+//==//main-scrin======================================================
+
+//==structure=========================================================
+
+.structure {
+  max-width: 940px;
+  padding: 0 20px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  @include adaptiv-value("margin-bottom", 100, 40, 1);
+
+  &__blok {
+    margin-bottom: 35px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media (max-width: 700px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__img {
+    width: 400px;
+    height: 270px;
+    @include adaptiv-value("height", 270, 202, 1);
+    @include adaptiv-value("width", 400, 300, 1);
+
+    img {
+      width: 100%;
+    }
+
+    @media (max-width: 700px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__item {
+    width: 417px;
+    margin-left: 20px;
+    @include adaptiv-value("width", 417, 300, 1);
+
+    @media (max-width: 700px) {
+      margin-left: 0;
+    }
+  }
+
+  &__sub-title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    line-height: 1.8;
+    border-bottom: 3.5px solid $green;
+
+    @media (max-width: 700px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__text {
+    line-height: 1.5;
+  }
+
+  &__text-mt-mb {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__text-mb {
+    margin-bottom: 10px;
+  }
+}
+//==//structure==================================================
+
+//==excursion====================================================
+.excursion {
+  margin-bottom: 100px;
+  @include adaptiv-value("margin-bottom", 100, 40, 1);
+
+  &_container {
+    max-width: 665px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  &__blok {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__text {
+    margin-bottom: 35px;
+    line-height: 1.6;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__img {
+    width: 625px;
+    height: 400px;
+    margin-bottom: 35px;
+    @include adaptiv-value("height", 400, 192, 1);
+    @include adaptiv-value("width", 625, 300, 1);
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+//==//excursion==================================================
+
+//==gallery=====================================================
+
+.gallery {
+  margin-bottom: 100px;
+  @include adaptiv-value("margin-bottom", 100, 40, 1);
+
+  &__container {
+    max-width: 480px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  &__text {
+    line-height: 1.6;
+    margin-bottom: 50px;
+    @include adaptiv-value("margin-bottom", 50, 25, 1);
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__container-btn {
+    @media (max-width: 767px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__blok {
+    position: relative;
+    margin-top: 70px;
+    @include adaptiv-value("margin-top", 70, 40, 1);
+  }
+}
+.image-slider {
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.image-slider__slide {
+  width: 300px;
+  height: 440px;
+}
+
+.image-slider__slide img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  display: block;
+  width: 100%;
+}
+
+.swiper-pagination {
+  bottom: -20px;
+}
+
+//==//gallery==================================================
+
+//==shop=======================================================
+.shop {
+  margin-bottom: 100px;
+  @include adaptiv-value("margin-bottom", 100, 60, 1);
+
+  &__container {
+    max-width: 770px;
+    padding: 0px 20px;
+    margin: 0 auto;
+  }
+
+  &__row {
+    min-height: 185px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fef5f2;
+    border: 2px solid $green;
+    @include adaptiv-value("min-height", 185, 91, 1);
+  }
+
+  &__text {
+    margin-top: 35px;
+    margin-left: 35px;
+    line-height: 1.3;
+    @include adaptiv-value("margin-top", 35, 15, 1);
+    @include adaptiv-value("margin-left", 35, 15, 1);
+    font-weight: 600;
+    @media (max-width: 526px) {
+      font-size: 12px;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    color: #e83030;
+    font-weight: 300;
+    margin-top: 35px;
+    font-weight: 500;
+    @include adaptiv-value("margin-top", 35, 20, 1);
+  }
+
+  &__link:hover {
+    text-decoration: underline;
+  }
+
+  &__img {
+    width: 193px;
+    min-height: 185px;
+    @include adaptiv-value("width", 193, 150, 1);
+    @include adaptiv-value("min-height", 185, 91, 1);
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+//==//shop==================================================
+
+//==map=====================================================
+.map {
+  position: relative;
+
+  &__scroll {
+    display: none;
+    @media (max-width: 767px) {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 600px;
+      margin-left: 40px;
+      background-color: rgba(255, 255, 255, 0);
+    }
+  }
+
+  &__blok {
+    position: absolute;
+    top: 90px;
+    left: 270px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-right: 60px;
+    padding-left: 30px;
+    border: 1px solid $text;
+    @include adaptiv-value("left", 270, 50, 1);
+    @include adaptiv-value("top", 90, 50, 1);
+    @include adaptiv-value("font-size", 14, 11, 1);
+    @include adaptiv-value("padding-top", 60, 25, 1);
+    @include adaptiv-value("padding-bottom", 60, 25, 1);
+    @include adaptiv-value("padding-left", 30, 15, 1);
+    @include adaptiv-value("padding-right", 30, 15, 1);
+  }
+
+  &__text {
+    position: relative;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  &__text-mb {
+    margin-bottom: 20px;
+  }
+}
+
+//==//map=======================================================
+
+//==about-main==================================================
+.main-scrin-about {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/about/main-about.jpg") center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about {
+  max-width: 920px;
+  padding: 0 20px;
+  margin: 0 auto;
+  line-height: 1.4;
+
+  &__title {
+    transform: translate(0px, 120%);
+    opacity: 0;
+    line-height: 1.3;
+    transition: all 0.8s ease 0s;
+  }
+
+  &__title.active-scroll {
+    opacity: 1;
+    transform: translate(0px, 0px);
+    transition: all 0.8s ease 0s;
+  }
+
+  &__img {
+    max-width: 900px;
+    height: auto;
+    overflow: hidden;
+
+    img {
+      max-width: 100%;
+      object-fit: cover;
+
+      @media (max-width: 767px) {
+        @include adaptiv-value("height", 330, 400, 1);
+      }
+    }
+  }
+}
+.about-mb {
+  margin-bottom: 30px;
+}
+
+.anim {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 150%);
+  transition: all 1.3s ease 0s;
+}
+
+.anim.active-scroll,
+.active-scroll .anim {
+  opacity: 1;
+  transform: translate(0px, 0px);
+  visibility: visible;
+}
+
+.anim-img img {
+  transform: scale(1.5);
+  transition: all 1.5s ease 0s;
+}
+
+.anim-img.active-scroll img {
+  transform: scale(1);
+  transition: all 1.5s ease 0s;
+}
+//==//about-main==================================================
+
+//==event=========================================================
+.main-scrin-event-ph {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/event/main-scrin-event-ph.jpg") center / cover
+    no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-scrin-event-ex {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/event/main-scrin-event-ex.jpg") center / cover
+    no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event {
+  margin-bottom: 50px;
+  @include adaptiv-value("margin-bottom", 50, 30, 1);
+
+  &__row {
+    display: flex;
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    width: 50%;
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__text {
+    line-height: 1.4;
+  }
+
+  &__img {
+    position: relative;
+    margin-left: 20px;
+    width: 585px;
+    height: 527px;
+
+    @include adaptiv-value("width", 585, 280, 1);
+    @include adaptiv-value("height", 527, 260, 1);
+
+    img {
+      width: 585px;
+      height: 527px;
+      object-fit: cover;
+      transition: all 2.5s ease;
+      @include adaptiv-value("width", 585, 280, 1);
+      @include adaptiv-value("height", 527, 260, 1);
+
+      @media (max-width: 767px) {
+        @include adaptiv-value("height", 527, 400, 1);
+      }
+    }
+    @media (max-width: 767px) {
+      margin-left: 0;
+      @include adaptiv-value("height", 527, 400, 1);
+    }
+  }
+  &__images-1-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    filter: blur(30px);
+  }
+  &__img :hover &__images-1-2 {
+    opacity: 1;
+    filter: blur(0px);
+    transition: all 1.5s ease;
+  }
+
+  &__images-2-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    filter: blur(30px);
+  }
+  &__img :hover &__images-2-2 {
+    opacity: 1;
+    filter: blur(0px);
+    transition: all 1.5s ease;
+  }
+}
+.event-mb1 {
+  margin-bottom: 27px;
+}
+
+.event-mb2 {
+  margin-bottom: 22px;
+}
+
+.info-mb1 {
+  margin-bottom: 27px;
+}
+
+.info-mb2 {
+  margin-bottom: 22px;
+}
+
+.info {
+  max-width: 900px;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  &__li {
+    position: relative;
+    left: 18px;
+    line-height: 1.2;
+  }
+
+  &__li::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: -10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: $text;
+  }
+
+  &__item {
+    line-height: 1.5;
+    margin-bottom: 50px;
+    @include adaptiv-value("margin-bottom", 50, 30, 1);
+
+    li {
+      line-height: 1.4;
+    }
+
+    span {
+      font-weight: 500;
+    }
+  }
+}
+
+//==//event===================================================
+
+//==visitors==================================================
+.main-scrin-visitors {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/visitors/main-scrin-visitors.jpg") center / cover
+    no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visitors-school {
+  &__item {
+    @include adaptiv-value("margin-bottom", 50, 30, 1);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  &__text {
+    flex: 0 1 60%;
+    line-height: 1.5;
+    margin-right: 20px;
+    @media (max-width: 767px) {
+      margin-right: 0px;
+    }
+  }
+
+  &__img {
+    width: 417px;
+    @include adaptiv-value("width", 417, 300, 1);
+    @include adaptiv-value("height", 610, 1400, 1);
+
+    img {
+      object-fit: cover;
+      @include adaptiv-value("width", 417, 300, 1);
+      @include adaptiv-value("height", 610, 1400, 1);
+      @media (max-width: 767px) {
+        width: 100%;
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      height: 400px;
+    }
+  }
+}
+
+.visitors-mb1 {
+  margin-bottom: 35px;
+}
+
+.visitors-mb2 {
+  margin-bottom: 25px;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  line-height: 1.5;
+  @include adaptiv-value("margin-bottom", 50, 30, 1);
+
+  @media (max-width: 814px) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
+  &__blok {
+    width: 561px;
+    @include adaptiv-value("width", 550, 100, 1);
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+    @media (max-width: 814px) {
+      width: 100%;
+      margin-right: 0px;
+    }
+  }
+
+  span {
+    font-weight: 500;
+  }
+}
+.options-mb1 {
+  margin-bottom: 18px;
+}
+.options-mb2 {
+  margin-bottom: 13px;
+}
+
+//==//visitors======================================================
+
+//==communications==================================================
+.main-scrin-communications {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/communications/main-scrin-communications.jpg") center /
+    cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.address {
+  line-height: 1.5;
+  @include adaptiv-value("margin-bottom", 70, 40, 1);
+  &__container {
+    max-width: 900px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+  }
+
+  &__form {
+    width: 330px;
+    @include adaptiv-value("width", 300, 280, 1);
+    margin-left: 20px;
+    @media (max-width: 767px) {
+      margin-left: 0px;
+      margin-bottom: 30px;
+    }
+  }
+}
+.address-mb1 {
+  margin-bottom: 27px;
+}
+.address-mb2 {
+  margin-bottom: 13px;
+}
+.address-mb3 {
+  margin-bottom: 8px;
+}
+
+.input-text-ar {
+  border: 2px solid $green;
+  padding: 10px;
+  height: 60px;
+  width: 100%;
+  resize: none;
+}
+.input-text-ar:focus {
+  border: 3px solid darken($green, $amount: 30%);
+}
+.btn {
+  &__blok-p {
+    text-align: center;
+    padding: 16px 0;
+  }
+}
+
+ol li {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+//==//communications==================================================
+
+//==store=============================================================
+.main-scrin-store {
+  height: 100vh;
+  width: 100%;
+  background: url("../img/store/main-scrin-store.jpg") center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 767px) {
+  .image-slider___column {
+    margin-top: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  .image-slider__slide2 {
+    text-align: center;
+  }
+}
+
+.image-slider___column,
+.image-slider___column1 {
+  height: 530px;
+  @include adaptiv-value("height", 530, 510, 1);
+}
+.image-slider2 {
+  margin-bottom: 90px;
+  @include adaptiv-value("margin-bottom", 90, 45, 1);
+}
+
+.store-mb1 {
+  margin-bottom: 25px;
+  display: inline-block;
+}
+.store-mb2 {
+  margin-bottom: 40px;
+}
+.store-mb3 {
+  margin-bottom: 60px;
+  @include adaptiv-value("margin-bottom", 60, 25, 1);
+}
+
+.store-mb4 {
+  margin-bottom: 18px;
+}
+.store-mb4 span {
+  font-weight: 500;
+}
+
+.store {
+  &__text {
+    line-height: 1.4;
+  }
+}
+
+//==//store===========================================================
+
+@import "popup";
+@import "footer";

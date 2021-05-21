@@ -1,0 +1,62 @@
+.footer {
+  background-color: $green;
+  min-height: 70px;
+  @include adaptiv-value("min-height", 70, 50, 1);
+
+  &__row {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__contscts {
+    min-height: 70px;
+    display: flex;
+    width: 340px;
+    justify-content: space-between;
+    align-items: center;
+    @include adaptiv-value("min-height", 70, 50, 1);
+  }
+
+  &__phone {
+    color: #453a3a;
+    padding: 3px 0;
+    padding-left: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: default;
+    background: url("../img/icons/icon-call-dark.svg") no-repeat left center;
+  }
+
+  &__instagram {
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: url("../img/icons/instagram-dark.svg") center no-repeat;
+    transition: all 0.3s ease 0s;
+  }
+
+  &__vk {
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: url("../img/icons/vk-dark.svg") center no-repeat;
+    transition: all 0.3s ease 0s;
+  }
+
+  &__facebook {
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: url("../img/icons/fb-dark.svg") center no-repeat;
+    transition: all 0.3s ease 0s;
+  }
+  &__instagram:hover,
+  &__vk:hover,
+  &__facebook:hover {
+    border-radius: 50%;
+    background-color: rgba(16, 85, 20, 0.3);
+    transform: scale(1.5);
+    transition: all 0.3s ease 0s;
+  }
+}
